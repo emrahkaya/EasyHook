@@ -36,9 +36,18 @@
 
 #else
 
-    #define NTDDI_VERSION           NTDDI_WIN2KSP4
-    #define _WIN32_WINNT            0x500
-    #define _WIN32_IE_              _WIN32_IE_WIN2KSP4
+	#ifndef NTDDI_VERSION
+	#define NTDDI_VERSION           NTDDI_WIN2KSP4
+	#endif // !NTDDI_VERSION
+
+
+	#if !defined(_WIN32_WINNT)
+	#define _WIN32_WINNT            0x500
+	#endif // !_WIN32_WINNT
+
+	#ifndef _WIN32_IE_
+	#define _WIN32_IE_              _WIN32_IE_WIN2KSP4
+	#endif // !_WIN32_IE_
 
     #include <windows.h>
     #include <winnt.h>
@@ -73,7 +82,7 @@ extern "C"{
 #define EASYHOOK_NT_EXPORT          EXTERN_C NTSTATUS EASYHOOK_API
 #define EASYHOOK_BOOL_EXPORT        EXTERN_C BOOL EASYHOOK_API
 
-#define MAX_HOOK_COUNT              1024
+#define MAX_HOOK_COUNT              2048
 #define MAX_ACE_COUNT               128
 #define MAX_THREAD_COUNT            128
 #define MAX_PASSTHRU_SIZE           1024 * 64
